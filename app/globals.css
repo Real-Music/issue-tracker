@@ -14,6 +14,12 @@
   }
 }
 
+@layer utilities {
+  .nav-link {
+    @apply text-zinc-500 hover:text-zinc-500 transition-colors;
+  }
+}
+
 body {
   /* color: rgb(var(--foreground-rgb)); */
 }
