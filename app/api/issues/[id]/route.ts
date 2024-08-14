@@ -1,5 +1,5 @@
 import authOptions from "@/app/auth/authOptions";
-import { issueSchema, patchIssueSchema } from "@/app/validationSchemas";
+import { patchIssueSchema } from "@/app/validationSchemas";
 import prisma from "@/prisma/client";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
@@ -21,7 +21,10 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
 	const issue = await prisma.issue.findUnique({ where: { id: parseInt(params.id) } })
 	if (!issue) return NextResponse.json({ error: 'Invalid issue' }, { status: 404 });
 
-	const updatedIssue = await prisma.issue.update({ where: { id: issue.id }, data: { title, description, assignedToUserId } })
+	const updatedIssue = await prisma.issue.update({
+		where: { id: issue.id },
+		data: { title, description, assignedToUserId }
+	})
 	return NextResponse.json(updatedIssue);
 }
 
