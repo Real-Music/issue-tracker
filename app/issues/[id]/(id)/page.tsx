@@ -41,4 +41,46 @@ const IssueDetailPage = async ({ params }: Props) => {
   );
 };
 
+export async function generateMetadata({ params }: Props) {
+  const issue = await prisma.issue.findUnique({
+    where: { id: parseInt(params.id) },
+  });
+
+  return {
+    title: `Issue Tracker - ${issue?.title} Detail`,
+    description:
+      "Welcome to the Issue Detail page. Here you can view the details of a specific issue, including its status, assignee, and other attributes.",
+    openGraph: {
+      title: `Issue Tracker - ${issue?.title} Detail`,
+      description:
+        "Welcome to the Issue Detail page. Here you can view the details of a specific issue, including its status, assignee, and other attributes.",
+      url: "https://your-website.com/issue-detail",
+      siteName: "Issue Tracker",
+      images: [
+        {
+          url: "https://your-website.com/issue-detail-image.jpg",
+          width: 800,
+          height: 600,
+          alt: "Issue Detail Page",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Issue Tracker - ${issue?.title} Detail`,
+      description:
+        "Welcome to the Issue Detail page. Here you can view the details of a specific issue, including its status, assignee, and other attributes.",
+      site: "@your_twitter_handle",
+      images: [
+        {
+          url: "https://your-website.com/issue-detail-image.jpg",
+          width: 800,
+          height: 600,
+          alt: "Issue Detail Page",
+        },
+      ],
+    },
+  };
+}
+
 export default IssueDetailPage;

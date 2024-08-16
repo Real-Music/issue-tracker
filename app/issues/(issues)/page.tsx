@@ -4,6 +4,7 @@ import { Status } from "@prisma/client";
 import IssueActions from "./IssueActions";
 import IssueTable, { columnNames, IssueQuery } from "./IssueTable";
 import { Flex } from "@radix-ui/themes";
+import { Metadata } from "next";
 
 interface Props {
   searchParams: IssueQuery;
@@ -48,3 +49,39 @@ const IssuesPage = async ({ searchParams }: Props) => {
 export const dynamic = "force-dynamic";
 // export const revalidate = 0;
 export default IssuesPage;
+
+export const metadata: Metadata = {
+  title: "Issue Tracker - Issues",
+  description:
+    "Welcome to the Issue Tracker Issues page. Here you can view, search, and filter issues based on their status and other attributes.",
+  openGraph: {
+    title: "Issue Tracker - Issues",
+    description:
+      "Welcome to the Issue Tracker Issues page. Here you can view, search, and filter issues based on their status and other attributes.",
+    url: "https://your-website.com/issues",
+    siteName: "Issue Tracker",
+    images: [
+      {
+        url: "https://your-website.com/issues-image.jpg",
+        width: 800,
+        height: 600,
+        alt: "Issue Tracker Issues Page",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Issue Tracker - Issues",
+    description:
+      "Welcome to the Issue Tracker Issues page. Here you can view, search, and filter issues based on their status and other attributes.",
+    site: "@your_twitter_handle",
+    images: [
+      {
+        url: "https://your-website.com/issues-image.jpg",
+        width: 800,
+        height: 600,
+        alt: "Issue Tracker Issues Page",
+      },
+    ],
+  },
+};
