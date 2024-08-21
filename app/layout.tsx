@@ -1,6 +1,7 @@
 import { Container, Theme } from "@radix-ui/themes";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
 
 // Local Components
 import NavBar from "./NavBar";
@@ -31,6 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body>
+        <NextTopLoader />
         <QueryClientProvider>
           <AuthProvider>
             <Theme accentColor="violet">
