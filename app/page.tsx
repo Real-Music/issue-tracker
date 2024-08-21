@@ -6,11 +6,17 @@ import LatestIssue from "./LatestIssue";
 import { Metadata } from "next";
 
 export default async function Home() {
-  const open = await prisma.issue.count({ where: { status: "OPEN" } });
-  const inProgress = await prisma.issue.count({
-    where: { status: "IN_PROGRESS" },
+  const issues = await prisma.issue.groupBy({
+    by: ["status"],
+    _count: { id: true },
   });
-  const closed = await prisma.issue.count({ where: { status: "CLOSED" } });
+
+  const open = issues.filter(({ status }) => status === "OPEN")[0]._count.id;
+  const inProgress = issues.filter(({ status }) => status === "IN_PROGRESS")[0]
+    ._count.id;
+
+  const closed = issues.filter(({ status }) => status === "CLOSED")[0]._count
+    .id;
 
   return (
     <Grid gap="5" columns={{ initial: "1", md: "2" }}>
